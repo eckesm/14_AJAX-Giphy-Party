@@ -1,4 +1,4 @@
-// console.log("Let's get this party started!");
+console.log("Let's get this party started!");
 
 const giphyKey = 'ea0yw5rmxNx3g7gHYRcPpKJsf1KRG38U';
 const examples = [
@@ -14,20 +14,24 @@ const examples = [
 ];
 
 /* ******************************************************************
------------------------- Search & Add GIF ---------------------------
+-------------------- Search & Add GIFs & Cards ----------------------
 ****************************************************************** */
 
 async function getGifUrl(api_key, tag) {
 	const res = await axios.get('https://api.giphy.com/v1/gifs/random', { params: { api_key, tag } });
 	console.log(tag + ': ' + res.data.data.image_url);
-	url = res.data.data.image_url;
-	addGifToContainer(url);
+	url = res.data.data;
+	const gifRadio = document.querySelector('#gifRadio').checked;
+	gifRadio ? addGifToContainer(url.image_url) : addCardToContainer(url);
 }
 
 function addGifToContainer(url) {
+	// console.log('gif:', url);
+
 	const newGif = document.createElement('img');
 	newGif.classList.add('img-thumbnail');
 	newGif.classList.add('m-3');
+
 	const gifContainer = document.querySelector('#gifContainer');
 	newGif.src = url;
 	gifContainer.append(newGif);
@@ -40,28 +44,24 @@ function populateGifContainer(array) {
 	}
 }
 
-// playing around with adding cards instead of GIFs
-// function populateCards(array) {
-// 	for (let gif of array) {
-//     const title='Title'
-//     const caption='caption'
-//     const link=gif
-//     const newCard=
+function addCardToContainer(url) {
+	// console.log('card:', url);
 
-//     `<div class="card">
-//     <img src="${gif}" class="card-img-top" alt="...">
-//     <div class="card-body">
-//       <h5 class="card-title">${title}</h5>
-//       <p class="card-text">${caption}</p>
-//       <a href="${link}" class="btn btn-primary">Go somewhere</a>
-//     </div>
-//   </div>`
+	const image = url.image_url;
+	const title = url.title;
+	const source = url.source;
 
-//   const gifContainer = document.querySelector('#gifContainer');
-//   gifContainer.innerHTML+=newCard
+	const newCard = `<div class="card m-3" style="width: 18rem;">
+	<img src="${image}" class="card-img-top" alt="${title}">	
+	<div class="card-body">
+			<p class="card-text"><b><Title: </b>${title}</p>
+			<a href="${source}" class="btn btn-primary">Go to Source</a>
+		</div>
+	</div>`;
 
-// 	}
-// }
+	const gifContainer = document.querySelector('#gifContainer');
+	gifContainer.innerHTML += newCard;
+}
 
 /* ******************************************************************
 ------------------------ When the DOM Loads -------------------------

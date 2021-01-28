@@ -24,7 +24,23 @@
       <button type="submit" class="col-12 btn btn-outline-primary" id="searchbutton" form="gifForm">Search & Add</button>
     </div>
 
-    <div class="col-5 col-sm-4 col-md-2 d-flex justify-content-start align-items-center mt-2 mt-md-0">
+    <div class="col-2 col-lg-1 mt-2 mt-md-0 text-primary">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gifOrCardRadio" id="gifRadio" checked>
+        <label class="form-check-label" for="gifRadio">
+          GIFs
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gifOrCardRadio" id="cardRadio">
+        <label class="form-check-label" for="cardRadio">
+          Cards
+        </label>
+      </div>
+    </div>
+
+
+    <div class="col-5 col-sm-4 col-md-2 d-flex justify-content-start align-items-start mt-2 mt-md-0">
       <button class="col-12 btn btn-outline-warning" id="clearbutton">Clear GIFs</button>
     </div>
 
@@ -33,9 +49,9 @@
 
 
 <div class="container-fluid">
-  <div id="gifContainer" class="align-items-center justify-content-center">
+    <div id="gifContainer" class="row col-12">
   
-  </div>
+    </div>
 </div>
 
 <body>
